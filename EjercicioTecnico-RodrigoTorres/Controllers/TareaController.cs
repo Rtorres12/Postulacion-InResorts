@@ -49,7 +49,7 @@ namespace EjercicioTecnico_RodrigoTorres.Controllers
             }
         }
         [HttpGet("{id},{estado}")]
-        public TareaBEAN getByEstado( int id, String estado) {
+        public IEnumerable<TareaBEAN> getByEstado( int id, String estado) {
 
             return tareadao.getByEstado(id, estado);
         }

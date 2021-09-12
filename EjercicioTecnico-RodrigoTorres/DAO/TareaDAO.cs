@@ -65,21 +65,22 @@ namespace EjercicioTecnico_RodrigoTorres.DAO
         {
             using (IDbConnection dbConnection = Connection)
             {
-                string squery = @"update tarea set Nom_tarea=@Nom_carpeta, Descripcion=@Descripcion, Estado=@Estado  where Id=@Id";
+                string squery = @"update tarea set Nom_tarea=@Nom_tarea, Descripcion=@Descripcion, Estado=@Estado  where Id=@Id";
                 dbConnection.Open();
                 dbConnection.Query(squery, tareabean);
 
             }
         }
 
-        public TareaBEAN getByEstado(int id_carpeta,String estado) 
+        public IEnumerable<TareaBEAN> getByEstado(int id_carpeta,String estado) 
         {
             using (IDbConnection dbConnection = Connection)
             {
 
                 string squery = @"EXEC SP_CARP_EST @idCarpeta,@estado";
+
                 dbConnection.Open();
-                return dbConnection.Query<TareaBEAN>(squery,new {idCarpeta=id_carpeta, estado=estado}).FirstOrDefault();
+                return dbConnection.Query<TareaBEAN>(squery,new {idCarpeta=id_carpeta, estado=estado});
 
             }
         
